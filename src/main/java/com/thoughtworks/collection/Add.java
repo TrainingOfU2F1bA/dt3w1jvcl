@@ -1,11 +1,9 @@
 package com.thoughtworks.collection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Add {
     public int getSumOfEvens(int leftBorder, int rightBorder) {
@@ -64,10 +62,6 @@ public class Add {
     }
 
     public List<Integer> getProcessedList(List<Integer> arrayList) {
-        List<Integer> subList = new ArrayList<Integer>(arrayList.subList(1, arrayList.size()));
-        for (int i = 0; i < subList.size(); i++) {
-           subList.set(i,(arrayList.get(i)+subList.get(i))*3);
-        }
-        return subList;
+        return IntStream.rangeClosed(1,arrayList.size()-1).map(x->arrayList.get(x-1)+arrayList.get(x)).map(x->x*3).boxed().collect(Collectors.toList());
     }
 }
